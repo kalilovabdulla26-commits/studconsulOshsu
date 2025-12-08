@@ -662,6 +662,24 @@
           padding-left: 0;
       }
     }
+    /* CSS: Стиль үчүн */
+.social-buttons {
+  display: flex;
+  gap: 10px; /* баскычтардын ортосуна аралык */
+  justify-content: center; /* ортого жайгаштыруу */
+  margin-top: 20px;
+}
+
+.social-buttons img {
+  width: 40px; /* иконанын өлчөмү */
+  height: 40px;
+  transition: transform 0.3s;
+}
+
+.social-buttons img:hover {
+  transform: scale(1.1); /* баскычты үстүнө келгенде чоңойтуу эффектиси */
+}
+
     
     @media(max-width: 750px){
         /* Мобилдик версияда форманы бир колонкага которуу */
@@ -1065,6 +1083,16 @@
         </form>
 
       </div>
+      <!-- HTML: Баскычтар -->
+        <div class="social-buttons">
+          <a href="https://instagram.com/studenttik_kenesh.oshmu?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+            <img src="instagram-icon.png" alt="Instagram" />
+            </a>
+            <a href="https://https://t.me/studentconsul" target="_blank">
+            <img src="telegram-icon.png" alt="Telegram" />
+        </a>
+    </div>
+
     </section>
     </main>
 
