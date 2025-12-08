@@ -680,7 +680,26 @@
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой сайт</title>
+  <style>
+    /* Для мобильных устройств */
+    @media (max-width: 768px) {
+      body {
+        background-color: lightblue;
+      }
+    }
 
+    /* Для десктопа */
+    @media (min-width: 769px) {
+      body {
+        background-color: lightgreen;
+      }
+    }
+  </style>
+</head>
 <body>
 
   <header>
@@ -1613,6 +1632,25 @@ On this day, students will:
     });
 
 
+  </script>
+</body>
+  <body>
+  <h1>Привет!</h1>
+
+  <script>
+    if (window.innerWidth <= 768) {
+      console.log("Открыто на мобильном устройстве");
+    } else {
+      console.log("Открыто на ПК");
+    }
+
+    // Проверка по userAgent
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      console.log("Мобильное устройство");
+    } else {
+      console.log("ПК или планшет");
+    }
   </script>
 </body>
 </html>
