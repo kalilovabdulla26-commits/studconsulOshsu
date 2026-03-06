@@ -69,7 +69,6 @@
       padding: 16px 18px;
     }
 
-
     .nav{
       display: flex;
       align-items: center;
@@ -110,15 +109,27 @@
 
     .brand-text{ font-weight:700; font-size:17px; white-space: nowrap; } 
 
-    nav{
+    /* БУРГЕР МЕНЮ ҮЧҮН СТИЛДЕР */
+    .hamburger {
+        display: none;
+        font-size: 30px;
+        cursor: pointer;
+        color: var(--text-color);
+        margin-left: auto;
+        padding: 0 10px;
+        user-select: none;
+    }
+
+    #navMenu {
         display: flex;
         gap: 6px; 
         flex-wrap: nowrap; 
         overflow-x: auto; 
         -webkit-overflow-scrolling: touch; 
+        transition: all 0.3s ease;
     }
     
-    nav a{
+    #navMenu a{
       text-decoration: none;
       color: var(--text-color);
       padding: 6px 8px; 
@@ -129,7 +140,7 @@
       white-space: nowrap; 
     }
 
-    nav a:hover{ background: var(--link-hover-bg); }
+    #navMenu a:hover{ background: var(--link-hover-bg); }
 
     .spacer{ flex: 1; }
 
@@ -164,6 +175,57 @@
     }
     .lang-toggle:hover, .mode-toggle:hover{ 
         background: var(--link-hover-bg); 
+    }
+
+    /* Мобилдик түзүлүш үчүн медиа суроо */
+    @media (max-width: 900px) {
+        .nav {
+            flex-wrap: wrap;
+        }
+        
+        .hamburger {
+            display: block;
+            order: 3;
+        }
+        
+        #navMenu {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px 0 10px 0;
+            order: 4;
+            overflow-x: visible;
+            border-top: 1px solid var(--border);
+        }
+        
+        #navMenu.show {
+            display: flex;
+        }
+        
+        #navMenu a {
+            width: 100%;
+            text-align: left;
+            padding: 12px 8px;
+            font-size: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        #navMenu a:last-child {
+            border-bottom: none;
+        }
+        
+        .brand-text { 
+            display: none; 
+        }
+        
+        .spacer {
+            flex: 0;
+        }
+        
+        .mode-toggle, .lang-toggle, .btn {
+            order: 2;
+        }
     }
 
     .hero{
@@ -638,14 +700,6 @@
     /* Responsive */
     @media(max-width: 900px){
       .hero{ grid-template-columns:1fr; }
-      .brand-text { display: none; } 
-      
-      nav {
-          display: flex;
-          overflow-x: auto;
-          padding-bottom: 5px; 
-          -webkit-overflow-scrolling: touch;
-      }
       
       /* КОНТАКТ ДИЗАЙН МОБИЛДИК ҮЧҮН */
       .contact-card-v2 {
@@ -714,7 +768,17 @@
         <div class="brand-text" data-key="brandTitle">ОшМУ студенттик кеңеш</div>
       </div>
 
-      <nav>
+      <div class="spacer"></div>
+
+      <button class="mode-toggle" id="darkModeToggle">☀️</button>
+      <button class="lang-toggle" id="langBtn">KY</button>
+      <button class="btn" onclick="location.href='#contact-card-v2'" data-key="btnContact">Байланыш</button>
+
+      <!-- Гамбургер баскычы -->
+      <div class="hamburger" id="hamburger">☰</div>
+
+      <!-- Навигация менюсу -->
+      <nav id="navMenu">
         <a href="#about" data-key="navAbout">Биз тууралуу</a>
         <a href="#news" data-key="navNews">Жаңылыктар</a>
         <a href="#resources" data-key="navResources">Ресурстар</a>
@@ -723,12 +787,6 @@
         <a href="#gallery" data-key="navGallery">Галерея</a>
         <a href="#contact-card-v2" data-key="navContact">Байланыш</a>
       </nav>
-
-      <div class="spacer"></div>
-
-      <button class="mode-toggle" id="darkModeToggle">☀️</button>
-      <button class="lang-toggle" id="langBtn">KY</button>
-      <button class="btn" onclick="location.href='#contact-card-v2'" data-key="btnContact">Байланыш</button>
     </div>
   </header>
 
@@ -1525,6 +1583,24 @@
 
     darkModeToggle.addEventListener('click', toggleDarkMode);
 
+    // ===================================
+    // 3.1 БУРГЕР МЕНЮ
+    // ===================================
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', function() {
+        navMenu.classList.toggle('show');
+    });
+
+    // Менюдогу шилтеме басылганда автоматтык түрдө жабуу (мобилдик версияда)
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 900) {
+                navMenu.classList.remove('show');
+            }
+        });
+    });
 
     // ===================================
     // 4. ГАЛЕРЕЯ (КАРУСЕЛЬ) ЖАНА LIGHTBOX
